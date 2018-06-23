@@ -1,16 +1,17 @@
 package agh.mwo.reporter;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Task {
 	private String surname;
 	private String name;
 	private String project;
-	private Date date;
+	private LocalDate date;
 	private String description;
 	private double hours;	
 	
-	
+
 	public String getSurname() {
 		return surname;
 	}
@@ -29,10 +30,10 @@ public class Task {
 	public void setProject(String project) {
 		this.project = project;
 	}
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 	public String getDescription() {
