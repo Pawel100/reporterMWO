@@ -13,6 +13,7 @@ public class Reporter {
 
         CommandParser commandLineParser = new CommandParser();
         CommandLine cmd = commandLineParser.run(args);
+
         
         Task task = new Task();
         ArrayList<Task> tasks = new ArrayList<Task>();
@@ -38,6 +39,7 @@ public class Reporter {
 //        
         ReportEmployees newRep = new ReportEmployees();
         newRep.generateReport(tasks, LocalDate.of(2011, 12, 12), LocalDate.of(2013, 12, 12));
+
 
 //        AppController appController = new AppController();
 //        appController.run(cmd);

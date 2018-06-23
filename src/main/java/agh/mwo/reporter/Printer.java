@@ -2,6 +2,7 @@ package agh.mwo.reporter;
 
 import java.util.List;
 
+
 public class Printer {
 
 	public static String title = "Raport godzinowy";
@@ -24,7 +25,7 @@ public class Printer {
 		
 		System.out.println(re.getReportHeader());
 		
-		// Drukowanie nag³ówków wszystkich kolumn z danego raportu
+		// Drukowanie nagï¿½ï¿½wkï¿½w wszystkich kolumn z danego raportu
 		for (int i = 0; i < re.getReportHeader().size(); i++) {
 			if (i < re.getReportHeader().size() - 1)
 				System.out.print(re.getReportHeader().get(i) + "    -    ");
