@@ -27,6 +27,8 @@ public class AppController {
 				System.out.println("\nWork Hours Report");
 				ReportEmployees reportEmployees = new ReportEmployees();
 				reportEmployees.generateReport(tasks, LocalDate.parse(startDate), LocalDate.parse(endDate));
+				Printer printer =new Printer();
+				printer.printToConsole(reportEmployees);
 				break;
 				
 			case "2":
