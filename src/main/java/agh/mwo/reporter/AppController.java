@@ -21,16 +21,16 @@ public class AppController {
             Task task = new Task();
             ArrayList<Task> fetchedData = new ArrayList<Task>();
 
-            task.setName("1");
-            task.setSurname("a");
+            task.setName("Jan");
+            task.setSurname("Kowalki");
             task.setHours(23);
             task.setDescription("dane");
             task.setProject("project 1");
             task.setDate(LocalDate.of(2018, 1, 1));
 
             Task task2 = new Task();
-            task2.setName("2");
-            task2.setSurname("z");
+            task2.setName("Marcin");
+            task2.setSurname("Nowak");
             task2.setHours(26);
             task2.setDescription("dane 22");
             task2.setProject("project 2");
@@ -44,6 +44,7 @@ public class AppController {
             switch (reportType) {
                 case "1":
                     // report workers summary of work hours
+                    System.out.println("\nWork Hours Report");
                     ReportEmployees reportEmployees = new ReportEmployees();
                     reportEmployees.generateReport(fetchedData, LocalDate.parse(startDate), LocalDate.parse(endDate));
                     break;

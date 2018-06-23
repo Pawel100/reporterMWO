@@ -23,7 +23,6 @@ public class CommandParser {
         CommandLineParser parser = new DefaultParser();
         try {
             CommandLine cmd = parser.parse(options, args);
-            System.out.println(cmd.getOptionValue("path"));
             return cmd;
         } catch (Exception e) {
             System.out.println(e);

@@ -33,4 +33,21 @@ public class TestCommandParser {
 
 
     }
+
+    @Test
+    public void testCommandLineWithAllValues() {
+
+        // Given
+
+        String[] yourArgs = new String[] {"-path", "C:/test", "-reportType", "1", "-startDate", "2012-02-02", "-endDate", "2018-04-04"};
+
+        // When
+        Reporter.main(yourArgs);
+
+        // Then
+
+
+    }
+
+
 }
