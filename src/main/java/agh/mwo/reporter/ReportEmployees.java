@@ -3,21 +3,14 @@ package agh.mwo.reporter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
+import java.util.TreeMap;
 
 public class ReportEmployees {
-	
+
 	private String title = "Raport zbiorczy godzinowy wg pracownikow";
-	private ArrayList<String> reportHeader;
-	private HashMap<String, Double> reportResults;
+	private List<String> reportHeader;
+	private TreeMap<String, Double> reportResults;
 	
 	public String getTitle() {
 		return title;
@@ -25,25 +18,26 @@ public class ReportEmployees {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public ArrayList<String> getReportHeader() {
+	public List<String> getReportHeader() {
 		return reportHeader;
 	}
-	public void setReportHeader(ArrayList<String> reportHeader) {
+	public void setReportHeader(List<String> reportHeader) {
 		this.reportHeader = reportHeader;
 	}
 	
-	public HashMap<String, Double> getReportResults() {
+	public TreeMap<String, Double> getReportResults() {
 		return reportResults;
 	}
-	public void setReportResults(HashMap<String, Double> reportResults) {
+	public void setReportResults(TreeMap<String, Double> reportResults) {
 		this.reportResults = reportResults;
 	}
 
-	public void generateReport(ArrayList<Task> tasks, LocalDate startDate, LocalDate endDate) {
-		ArrayList<String> headers = new ArrayList(Arrays.asList("Nazwisko i imi�", "Liczba przepracowanych godzin"));
+
+	public void generateReport(List<Task> tasks, LocalDate startDate, LocalDate endDate) {
+		List<String> headers = Arrays.asList("Nazwisko i imie", "Liczba przepracowanych godzin");
 		this.setReportHeader(headers);
 
-		HashMap<String, Double> temporary = new HashMap<String, Double>();
+		TreeMap<String, Double> temporary = new TreeMap<String, Double>();
 		ArrayList<Task> filteredTasks = new ArrayList<Task>();
 		
 		for(Task task : tasks) {
@@ -62,38 +56,10 @@ public class ReportEmployees {
 			}
 		}		
 		
-		this.setReportResults(this.sortByValues(temporary));	
+		this.setReportResults(temporary);	
 		for(String r : this.reportResults.keySet()) {
 			System.out.println(r);
 		}
-	}	
-	
-	private static HashMap sortByValues(HashMap map) { 
-
-	       List list = new LinkedList(map.entrySet());
-
-	       // Defined Custom Comparator here
-	       Collections.sort(list, new Comparator() {
-
-	            public int compare(Object o1, Object o2) {
-
-	               return ((Comparable) ((Map.Entry) (o1)).getValue())
-	                  .compareTo(((Map.Entry) (o2)).getValue());
-	            }
-	       });
-
-	       // Here I am copying the sorted list in HashMap
-	       // using LinkedHashMap to preserve the insertion order
-
-	     HashMap sortedHashMap = new LinkedHashMap();
-
-	       for (Iterator it = list.iterator(); it.hasNext();) {
-
-	              Map.Entry entry = (Map.Entry) it.next();
-
-	              sortedHashMap.put(entry.getKey(), entry.getValue());
-	       } 
-	       return sortedHashMap;
-	  }
+	}
 
 }
