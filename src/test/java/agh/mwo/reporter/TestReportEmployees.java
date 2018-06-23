@@ -1,21 +1,18 @@
 package agh.mwo.reporter;
 
-import org.apache.commons.cli.CommandLine;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
-public class Reporter {
-
-    public static void main(String[] args) {
-
-        System.out.println("Welcome to Reporter Project - MWO2017/2018");
-
-        CommandParser commandLineParser = new CommandParser();
-        CommandLine cmd = commandLineParser.run(args);
+public class TestReportEmployees {
+	
+//	@Test
+	public void testReport() {
         
         Task task = new Task();
         ArrayList<Task> tasks = new ArrayList<Task>();
         
         task.setName("1");
-        task.setSurname("za");
+        task.setSurname("a");
         task.setHours(23);
         task.setDescription("dane");
         task.setProject("project 1");
@@ -23,7 +20,7 @@ public class Reporter {
         
         Task task2 = new Task();
         task2.setName("2");
-        task2.setSurname("aaaz");
+        task2.setSurname("z");
         task2.setHours(26);
         task2.setDescription("dane 22");
         task2.setProject("project 2");
@@ -34,9 +31,6 @@ public class Reporter {
         
         ReportEmployees newRep = new ReportEmployees();
         newRep.generateReport(tasks, LocalDate.of(2017, 12, 12), LocalDate.of(2018, 12, 12));
+	}
 
-        AppController appController = new AppController();
-        appController.run(cmd);
-
-    }
 }
