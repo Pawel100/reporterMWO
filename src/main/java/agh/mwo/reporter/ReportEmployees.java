@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class ReportEmployees {
 	
-	private String title = "Raport zbiorczy godzinowy wg pracowników";
+	private String title = "Raport zbiorczy godzinowy wg pracownikow";
 	private ArrayList<String> reportHeader;
 	private HashMap<String, Double> reportResults;
 	
@@ -40,7 +40,7 @@ public class ReportEmployees {
 	}
 
 	public void generateReport(ArrayList<Task> tasks, LocalDate startDate, LocalDate endDate) {
-		ArrayList<String> headers = new ArrayList(Arrays.asList("Nazwisko i imiê", "Liczba przepracowanych godzin"));
+		ArrayList<String> headers = new ArrayList(Arrays.asList("Nazwisko i imiï¿½", "Liczba przepracowanych godzin"));
 		this.setReportHeader(headers);
 
 		HashMap<String, Double> temporary = new HashMap<String, Double>();
