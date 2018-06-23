@@ -2,8 +2,10 @@ package agh.mwo.reporter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -36,15 +38,11 @@ public class ReportEmployees {
 	public void setReportResults(HashMap<String, Double> reportResults) {
 		this.reportResults = reportResults;
 	}
-	// TODO
-	private void setHeaders() {
-		this.reportHeader.add("Nazwisko");
-		this.reportHeader.add("Imiê");
-		this.reportHeader.add("Liczba przepracowanych godzin");		
-	}
-	
+
 	public void generateReport(ArrayList<Task> tasks, LocalDate startDate, LocalDate endDate) {
-		this.setHeaders();
+		ArrayList<String> headers = new ArrayList(Arrays.asList("Nazwisko i imiê", "Liczba przepracowanych godzin"));
+		this.setReportHeader(headers);
+
 		HashMap<String, Double> temporary = new HashMap<String, Double>();
 		ArrayList<Task> filteredTasks = new ArrayList<Task>();
 		
@@ -65,6 +63,9 @@ public class ReportEmployees {
 		}		
 		
 		this.setReportResults(this.sortByValues(temporary));	
+		for(String r : this.reportResults.keySet()) {
+			System.out.println(r);
+		}
 	}	
 	
 	private static HashMap sortByValues(HashMap map) { 

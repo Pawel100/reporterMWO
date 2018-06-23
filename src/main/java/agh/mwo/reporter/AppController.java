@@ -12,7 +12,7 @@ public class AppController {
             String startDate = cmd.getOptionValue("startDate");
             String endDate = cmd.getOptionValue("endDate");
             String outputType = cmd.getOptionValue("outputType");
-            
+
             // todo - uruchomm raport jak bedzie raportgotowy
 
 
