@@ -11,7 +11,8 @@ public class Reporter {
         CommandParser commandLineParser = new CommandParser();
         CommandLine cmd = commandLineParser.run(args);
 
-        
+        AppController appController = new AppController();
+        appController.run(cmd);
 
     }
 }
