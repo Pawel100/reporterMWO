@@ -1,7 +1,11 @@
+package agh.mwo.reporter;
+
+import java.util.List;
+
 public class Printer {
 
 	public static String title = "Raport godzinowy";
-	public static ArrayList<String> reportHeader;
+	public static List<String> reportHeader;
 	
 
 	public static void main(String[] args) {

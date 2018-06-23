@@ -1,5 +1,8 @@
 package agh.mwo.reporter;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 import org.apache.commons.cli.CommandLine;
 
 public class Reporter {
@@ -13,30 +16,32 @@ public class Reporter {
         
         Task task = new Task();
         ArrayList<Task> tasks = new ArrayList<Task>();
+        tasks = Scan.getAllRecords("C:\\Users\\Awar\\Documents\\AGH_MWO\\reporterMWO\\src\\main\\resources\\reporter-dane\\2012\\01");
         
-        task.setName("1");
-        task.setSurname("za");
-        task.setHours(23);
-        task.setDescription("dane");
-        task.setProject("project 1");
-        task.setDate(LocalDate.of(2018, 1, 1));
-        
-        Task task2 = new Task();
-        task2.setName("2");
-        task2.setSurname("aaaz");
-        task2.setHours(26);
-        task2.setDescription("dane 22");
-        task2.setProject("project 2");
-        task2.setDate(LocalDate.of(2018, 1, 1));
-        
-        tasks.add(task);
-        tasks.add(task2);
-        
+//        task.setName("1");
+//        task.setSurname("za");
+//        task.setHours(23);
+//        task.setDescription("dane");
+//        task.setProject("project 1");
+//        task.setDate(LocalDate.of(2018, 1, 1));
+//        
+//        Task task2 = new Task();
+//        task2.setName("2");
+//        task2.setSurname("aaaz");
+//        task2.setHours(26);
+//        task2.setDescription("dane 22");
+//        task2.setProject("project 2");
+//        task2.setDate(LocalDate.of(2018, 1, 1));
+//        
+//        tasks.add(task);
+//        tasks.add(task2);
+//        
         ReportEmployees newRep = new ReportEmployees();
-        newRep.generateReport(tasks, LocalDate.of(2017, 12, 12), LocalDate.of(2018, 12, 12));
+        newRep.generateReport(tasks, LocalDate.of(2011, 12, 12), LocalDate.of(2013, 12, 12));
 
-        AppController appController = new AppController();
-        appController.run(cmd);
+//        AppController appController = new AppController();
+//        appController.run(cmd);
+        
 
     }
 }
