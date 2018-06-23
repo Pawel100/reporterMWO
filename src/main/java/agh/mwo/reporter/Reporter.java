@@ -1,5 +1,8 @@
 package agh.mwo.reporter;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 import org.apache.commons.cli.CommandLine;
 
 public class Reporter {
@@ -10,8 +13,6 @@ public class Reporter {
 
         CommandParser commandLineParser = new CommandParser();
         CommandLine cmd = commandLineParser.run(args);
-
-        
 
     }
 }
