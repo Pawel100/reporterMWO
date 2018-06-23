@@ -1,8 +1,5 @@
 package agh.mwo.reporter;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-
 import org.apache.commons.cli.CommandLine;
 
 public class Reporter {
@@ -37,6 +34,9 @@ public class Reporter {
         
         ReportEmployees newRep = new ReportEmployees();
         newRep.generateReport(tasks, LocalDate.of(2017, 12, 12), LocalDate.of(2018, 12, 12));
+
+        AppController appController = new AppController();
+        appController.run(cmd);
 
     }
 }
