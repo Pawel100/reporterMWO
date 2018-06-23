@@ -57,6 +57,7 @@ public class ReportEmployees {
 		}		
 		
 		this.setReportResults(temporary);
+		
 		System.out.println("\nNazwisko  Imie  Liczba Godzin");
 		System.out.println("-------------------------------");
 		for(String r : this.reportResults.keySet()) {

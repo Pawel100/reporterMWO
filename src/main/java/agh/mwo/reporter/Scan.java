@@ -49,7 +49,7 @@ public class Scan {
 		try {
 			Workbook wb = WorkbookFactory.create(new File(path));
 				String fullPath = path;
-				System.out.println(fullPath);
+				//System.out.println(fullPath);
 				int startOfName = fullPath.lastIndexOf("_")+1;
 				int endOfname = fullPath.indexOf(".");
 				int startOfSurname = fullPath.lastIndexOf("\\")+1;		
