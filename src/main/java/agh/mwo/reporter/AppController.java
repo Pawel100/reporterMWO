@@ -4,6 +4,7 @@ import org.apache.commons.cli.CommandLine;
 
 import agh.mwo.reports.IReport;
 import agh.mwo.reports.ReportEmployees;
+import agh.mwo.reports.ReportEmployeesPerProjects;
 import agh.mwo.reports.ReportProjects;
 import agh.mwo.reports.ReportDays;
 import agh.mwo.visualization.ChartExporter;
@@ -21,27 +22,36 @@ public class AppController {
 
 	public void run(CommandLine cmd) {
 		
+		String START = "start";
+		String END = "end";
+		
 		if (cmd.hasOption("h")) {
 			System.out.println("help");
-		};
-		
+		}
 
 		reportsMap.put("1", new ReportEmployees());
 		reportsMap.put("2", new ReportProjects());
+		reportsMap.put("3", new ReportEmployeesPerProjects());
 		reportsMap.put("4", new ReportDays());
 		// add upcoming reports above
 
 		String path = cmd.getOptionValue("path");
 		String reportType = cmd.getOptionValue("reportType");
-		String startDate="";
-		String endDate="";
 
-		if (path!=null && reportType!=null) {
+		String startDate = "";
+		String endDate = "";
 
+		if (path != null && reportType != null) {
 			// checking date from commandline.
-			DateChecker dateChecker = new DateChecker();
-			startDate = dateChecker.setDate("start", cmd.getOptionValue("startDate"), path);
-			endDate = dateChecker.setDate("end", cmd.getOptionValue("endDate"), path);
+			try {
+				DateChecker dateChecker = new DateChecker();
+				startDate = dateChecker.setDate(START, cmd.getOptionValue("startDate"), path);
+				endDate = dateChecker.setDate(END, cmd.getOptionValue("endDate"), path);
+			} catch (TypeOfDateException ex) {
+				System.out.println("SET KIND OF DATE: START OR END");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 
 			String outputType = cmd.getOptionValue("outputType");
 
@@ -54,7 +64,7 @@ public class AppController {
 			IReport report = reportsMap.get(reportType);
 			report.generateReport(tasks, LocalDate.parse(startDate), LocalDate.parse(endDate));
 			
-			if (outputType != null && outputType == "Graph") {
+			if (outputType != null && outputType.equals("graph")) {
 				ChartExporter chart = new ChartExporter();
 				try {reportsMap.put("2", new ReportProjects());
 					chart.saveReportAsChart(report, reportType);
@@ -62,10 +72,10 @@ public class AppController {
 					e.printStackTrace();
 					System.out.println("Chart export failed, displaying results in the console window");
 					printer.printReport(report);
-				};
+				}
 			} else {
 				printer.printReport(report);
-			}		
+			}
 
 		} else {
 			if (!cmd.hasOption("h")) {

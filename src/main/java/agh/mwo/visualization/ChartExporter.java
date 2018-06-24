@@ -26,8 +26,11 @@ public class ChartExporter {
 			case "2":
 				seriesName = "Projects";
 				break;
+			case "4":
+				seriesName = "Weekdays";
+				break;
 			default:
-				seriesName = "Series";
+				throw new IOException();
 		}
 
 		CategoryChart chart = new CategoryChartBuilder().width(1200).height(800).title(report.getTitle()).xAxisTitle(report.getReportHeader().get(0)).yAxisTitle(report.getReportHeader().get(1)).build();
@@ -48,6 +51,9 @@ public class ChartExporter {
 		    	names[i] = nameToBeShortened[0] + " " + nameToBeShortened[1].charAt(0) + ".";
 				break;
 			case "2":
+				names[i] = entry.getKey();
+				break;
+			case "4":
 				names[i] = entry.getKey();
 				break;
 			default:
