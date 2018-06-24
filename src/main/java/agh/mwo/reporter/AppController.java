@@ -19,11 +19,11 @@ public class AppController {
 	Map<String, IReport> reportsMap = new HashMap<>();
 
 	public void run(CommandLine cmd) {
-		
+
 		if (cmd.hasOption("h")) {
 			System.out.println("help");
-		};
-		
+		}
+		;
 
 		reportsMap.put("1", new ReportEmployees());
 		reportsMap.put("2", new ReportProjects());
@@ -31,10 +31,10 @@ public class AppController {
 
 		String path = cmd.getOptionValue("path");
 		String reportType = cmd.getOptionValue("reportType");
-		String startDate="";
-		String endDate="";
+		String startDate = "";
+		String endDate = "";
 
-		if (path!=null && reportType!=null) {
+		if (path != null && reportType != null) {
 
 			// checking date from commandline.
 			DateChecker dateChecker = new DateChecker();
@@ -51,19 +51,20 @@ public class AppController {
 			// select report
 			IReport report = reportsMap.get(reportType);
 			report.generateReport(tasks, LocalDate.parse(startDate), LocalDate.parse(endDate));
-			
+
 			if (outputType != null && outputType == "Graph") {
 				ChartExporter chart = new ChartExporter();
 				try {
 					chart.saveReportAsChart(report, reportType);
 				} catch (IOException e) {
 					e.printStackTrace();
-					System.out.println("Nie uda³o siê wygenerowaæ wykresu, wyœwietlam w konsoli");
+					System.out.println("Nie udaï¿½o siï¿½ wygenerowaï¿½ wykresu, wyï¿½wietlam w konsoli");
 					printer.printReport(report);
-				};
+				}
+				;
 			} else {
 				printer.printReport(report);
-			}		
+			}
 
 		} else {
 			if (!cmd.hasOption("h")) {
