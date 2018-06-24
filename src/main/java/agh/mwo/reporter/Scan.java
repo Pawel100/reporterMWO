@@ -12,14 +12,15 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 public class Scan {
-	// ta funkcja eksploruje wszystkie podfoldery i zwraca w arrayliœcie stringów
-	// œcie¿ki do plików z rozszerzeneim .xls
+	// ta funkcja eksploruje wszystkie podfoldery i zwraca w arrayliï¿½cie stringï¿½w
+	// ï¿½cieï¿½ki do plikï¿½w z rozszerzeneim .xls
 	public static ArrayList<String> exploreFolders(String path) {
 		ArrayList<String> toReturn = new ArrayList<String>();
 
@@ -42,10 +43,11 @@ public class Scan {
 		return toReturn;
 	}
 
-	// funkcja ze œcie¿ki wczytuje plik eksela ekstrahuj¹c imiê i nazwisko, iteruje
-	// po zak³adkach nazwa zak³adki=>project
+	// funkcja ze ï¿½cieï¿½ki wczytuje plik eksela ekstrahujï¿½c imiï¿½ i nazwisko, iteruje
+	// po zakï¿½adkach nazwa zakï¿½adki=>project
 	public static ArrayList<Task> readXls(String path) {
 		ArrayList<Task> toReturn = new ArrayList<Task>();
+		ArrayList<String> errorLog = new ArrayList<String>();
 		try {
 			Workbook wb = WorkbookFactory.create(new File(path));
 				String fullPath = path;
@@ -55,17 +57,82 @@ public class Scan {
 				int startOfSurname = fullPath.lastIndexOf("\\")+1;		
 				String name = new String(fullPath.substring(startOfName, endOfname));
 				String surname = new String(fullPath.substring(startOfSurname, startOfName-1));
-			// iterujê po sheetach
+			// iterujï¿½ po sheetach
 			for (int i = 0; i < wb.getNumberOfSheets(); i++) {
 				Sheet sheet = wb.getSheetAt(i);
 				String project = sheet.getSheetName();
 				for (int j = 1; j <= sheet.getLastRowNum(); j++) {
 					Row r = sheet.getRow(j);
+					//obsÅ‚uga zÅ‚ych lub pustych komÃ³rek
+					Cell c0 = r.getCell(0);
+					Cell c1 = r.getCell(1);
+					Cell c2 = r.getCell(1);
+					if(c0 == null) {
+						errorLog.add("Cell 0 at row " + j + " in file " + path + " is null");
+						break;
+					}
+					if(c1 == null) {
+						errorLog.add("Cell 1 at row " + j + " in file " + path + " is null");
+						break;
+					}
+					if(c2 == null) {
+						errorLog.add("Cell 2 at row " + j + " in file " + path + " is null");
+						break;
+					}
+					if(c0.getBooleanCellValue()) {
+						errorLog.add("Cell 0 at row " + j + " in file " + path + " is blank");
+						break;
+					}
+					if(c1.getBooleanCellValue()) {
+						errorLog.add("Cell 1 at row " + j + " in file " + path + " is blank");
+						break;
+					}
+					if(c2.getBooleanCellValue()) {
+						errorLog.add("Cell 2 at row " + j + " in file " + path + " is blank");
+						break;
+					}
+					
+					//inicjalicacja zmiennych
+					LocalDate localDate;
+					String description;
+					double hours;
+					
+					
+					
+					
+					try {
 					Date date = r.getCell(0).getDateCellValue();
-					String description = r.getCell(1).getStringCellValue();
-					double hours = r.getCell(2).getNumericCellValue();
-					//DateTimeFormatter formatter_3=DateTimeFormatter.ofPattern("dd/MM/yy");
-					LocalDate localDate= date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+					localDate= date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+					} catch (Exception e)
+					{
+						errorLog.add("Cell 0 at row " + j + " in file " + path + " is not a date");
+						break;
+					}
+					
+					try {
+						description = r.getCell(1).getStringCellValue();
+					} catch (Exception e)
+					{
+						errorLog.add("Cell 1 at row " + j + " in file " + path + " is not a string");
+						break;
+					}
+					
+					try {
+						hours = r.getCell(2).getNumericCellValue();
+					} catch (Exception e)
+					{
+						errorLog.add("Cell 2 at row " + j + " in file " + path + " is not a numeric");
+						break;
+					}
+					
+					if(hours>16) {
+						errorLog.add("Cell 2 at row " + j + " in file " + path + " shows thas someone is working too hard!");
+						break;
+					}
+					
+					
+					
+					//tworzenie obiektu
 					Task toAdd = new Task();
 					toAdd.setDate(localDate);
 					toAdd.setDescription(description);
@@ -87,6 +154,17 @@ public class Scan {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		
+		//printowanie bÅ‚Ä™dÃ³w wczytywania
+		if(errorLog.size()==0) {
+			System.out.println("No error encountered during .xls reading.");
+		}
+		else {
+			System.out.println("Error(s) encounter during .xls reading:");
+			for (int i = 0; i<errorLog.size(); i++) {
+				System.out.println(errorLog.get(i));
+			}
 		}
 
 		return toReturn;
