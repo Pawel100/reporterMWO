@@ -10,14 +10,23 @@ import agh.mwo.visualization.PrintingToConsole;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AppController {
+	Map<String, IReport> reportsMap = new HashMap<>();
+
 	public void run(CommandLine cmd) {
 		
 		if (cmd.hasOption("h")) {
 			System.out.println("help");
 		};
 		
+
+		reportsMap.put("1", new ReportEmployees());
+		reportsMap.put("2", new ReportProjects());
+		// add upcoming reports above
+
 		String path = cmd.getOptionValue("path");
 		String reportType = cmd.getOptionValue("reportType");
 		String startDate="";
@@ -37,34 +46,19 @@ public class AppController {
 
 			tasks = Scan.getAllRecords(path);
 
-			switch (reportType) {
-			case "1":
-				// report workers summary of work hours
-				IReport reportEmployees = new ReportEmployees();
-				reportEmployees.generateReport(tasks, LocalDate.parse(startDate), LocalDate.parse(endDate));
-				printer.printReport(reportEmployees);
-				break;
-				
-			case "2":
-				// report per project hours
-				ReportProjects reportProjects = new ReportProjects();
-				reportProjects.generateReport(tasks, LocalDate.parse(startDate), LocalDate.parse(endDate));
-				printer.printReport(reportProjects);
-				break;
-				
-			case "3":
-				// work hours per projects for each employee
+			// select report
+			IReport report = reportsMap.get(reportType);
+			report.generateReport(tasks, LocalDate.parse(startDate), LocalDate.parse(endDate));
+			printer.printReport(report);
 
-				break;
-				
-			default:
-				System.out.println("Bye!");
-				break;
-			}
 		} else {
+<<<<<<< HEAD
 			if (!cmd.hasOption("h")) {
 				System.out.println("Given arguments are incorrect: ");
 			}
+=======
+			System.out.println("Given arguments are incorrect. ");
+>>>>>>> e69e821adb8be7ca7f71f424a285bd0aa4cf7e2d
 		}
 
 	}
