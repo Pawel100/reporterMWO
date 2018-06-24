@@ -22,11 +22,28 @@ public class AppController {
 
 	public void run(CommandLine cmd) {
 		
+		
+		
 		String START = "start";
 		String END = "end";
 		
 		if (cmd.hasOption("h")) {
-			System.out.println("help");
+			System.out.println("Witaj w pomocy Reporter Project!\r\n" + 
+					"\r\n" + 
+					"W celu wyœwietlenia danych wpisz nastêpuj¹ce opcje:\r\n" + 
+					"\r\n" + 
+					"- path - podaj œcie¿kê do plików xls\r\n" + 
+					"- reportType - podaj wersjê raportu (1 - 5)\r\n" + 
+					"\r\n" + 
+					"Wybierz datê pocz¹tkow¹ w formacie YYYY-MM-DD\r\n" + 
+					"\r\n" + 
+					"Wybierz datê koñcow¹ w formacie YYYY-MM-DD\r\n" + 
+					"\r\n" + 
+					"Wybierz sposób prezentacji danych:\r\n" + 
+					"\r\n" + 
+					"  - wyœwietlenie danych w konsoli\r\n" + 
+					"  - wyœwietlenie danych w formie wykresu\r\n" + 
+					"");
 		}
 
 		reportsMap.put("1", new ReportEmployees());
@@ -69,7 +86,7 @@ public class AppController {
 				try {reportsMap.put("2", new ReportProjects());
 					chart.saveReportAsChart(report, reportType);
 				} catch (IOException e) {
-					e.printStackTrace();
+					//e.printStackTrace();
 					System.out.println("Chart export failed, displaying results in the console window");
 					printer.printReport(report);
 				}
