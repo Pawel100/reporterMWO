@@ -79,18 +79,6 @@ public class Scan {
 						errorLog.add("Cell 2 at row " + j + " in file " + path + " is null");
 						break;
 					}
-					if(c0.getStringCellValue().isEmpty()) {
-						errorLog.add("Cell 0 at row " + j + " in file " + path + " is blank");
-						break;
-					}
-					if(c1.getStringCellValue().isEmpty()) {
-						errorLog.add("Cell 1 at row " + j + " in file " + path + " is blank");
-						break;
-					}
-					if(c2.getStringCellValue().isEmpty()) {
-						errorLog.add("Cell 2 at row " + j + " in file " + path + " is blank");
-						break;
-					}
 					
 					//inicjalicacja zmiennych
 					LocalDate localDate;
@@ -99,7 +87,7 @@ public class Scan {
 					
 					
 					
-					
+					//sprawdzanie poprawności czytanych danych
 					try {
 					Date date = r.getCell(0).getDateCellValue();
 					localDate= date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -111,6 +99,10 @@ public class Scan {
 					
 					try {
 						description = r.getCell(1).getStringCellValue();
+						if(description.isEmpty()) {
+							errorLog.add("Description at row " + j + " in file " + path + " is blank");
+							break;	
+						}
 					} catch (Exception e)
 					{
 						errorLog.add("Cell 1 at row " + j + " in file " + path + " is not a string");
@@ -129,6 +121,8 @@ public class Scan {
 						errorLog.add("Cell 2 at row " + j + " in file " + path + " shows thas someone is working too hard!");
 						break;
 					}
+					
+					
 					
 					
 					
