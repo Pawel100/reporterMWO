@@ -17,13 +17,19 @@ import agh.mwo.reports.Report;
 
 public class ChartExporter {
 	
-	public CategoryChart generateChart(IReport report, String chartType) {
+	public CategoryChart generateChart(IReport report, String chartType) throws IOException {
 		String seriesName = "";
-		if(chartType == "1") {
-			seriesName = "Pracownicy";
-		} else {
-			seriesName = "Projekty";
+		switch (chartType) {
+			case "1":
+				seriesName = "Employees";
+				break;
+			case "2":
+				seriesName = "Projects";
+				break;
+			default:
+				seriesName = "Series";
 		}
+
 		CategoryChart chart = new CategoryChartBuilder().width(1200).height(800).title(report.getTitle()).xAxisTitle(report.getReportHeader().get(0)).yAxisTitle(report.getReportHeader().get(1)).build();
 	    // Customize Chart
 	    chart.getStyler().setLegendPosition(LegendPosition.InsideNW);
@@ -35,14 +41,19 @@ public class ChartExporter {
 	    
 	    int i = 0;
 	    
-	    for(Entry<String, Double> entry : report.getReportResults().entrySet()) {	    	
-	    	if(chartType == "1") {
-	    		String[] nameToBeShortened = entry.getKey().split("\\s+");	    	
+	    for(Entry<String, Double> entry : report.getReportResults().entrySet()) {
+	    	switch (chartType) {
+			case "1":
+				String[] nameToBeShortened = entry.getKey().split("\\s+");	    	
 		    	names[i] = nameToBeShortened[0] + " " + nameToBeShortened[1].charAt(0) + ".";
-			} else {
+				break;
+			case "2":
 				names[i] = entry.getKey();
-			}
-	    
+				break;
+			default:
+				throw new IOException();
+	    	}
+
 	    	hours[i] = entry.getValue();	    	
 	    	i++;    	
 	    }

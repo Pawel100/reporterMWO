@@ -67,7 +67,7 @@ public class AppController {
 					chart.saveReportAsChart(report, reportType);
 				} catch (IOException e) {
 					e.printStackTrace();
-					System.out.println("Nie uda�o si� wygenerowa� wykresu, wy�wietlam w konsoli");
+					System.out.println("Chart export failed, displaying results in the console window");
 					printer.printReport(report);
 				}
 				;

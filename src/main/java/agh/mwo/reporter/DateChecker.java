@@ -15,12 +15,10 @@ public class DateChecker {
 				String year = macher.group(1);
 				String month = (macher.group(2) == null) ? "01" : macher.group(2);
 				if (opt.equals("start")) {
-					//System.out.println("start");
 					return year + "-" + month + "-" + "01";
 				}
 				if(opt.equals("end")) {
 					LocalDate endDateExample = LocalDate.of(Integer.valueOf(year), Integer.valueOf(month), 01);
-					//System.out.println(year + "-" + month + "-" + endDateExample.getMonth().length(Year.isLeap(Long.valueOf(year))));
 					return year + "-" + month + "-" + endDateExample.getMonth().length(Year.isLeap(Long.valueOf(year)));
 					
 				}else {
