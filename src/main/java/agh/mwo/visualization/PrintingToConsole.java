@@ -2,11 +2,15 @@ package agh.mwo.visualization;
 
 import java.util.List;
 
-import agh.mwo.reports.Report;
+import agh.mwo.reports.IReport;
 
-public class PrintingToConsole {
+public class PrintingToConsole implements IPrinter {
 
-	public void printReport(Report report) {
+	/* (non-Javadoc)
+	 * @see agh.mwo.visualization.IPrinter#printReport(agh.mwo.reports.Report)
+	 */
+	@Override
+	public void printReport(IReport report) {
 		int maxLength = 0;
 
 		System.out.println("-------------------------------------------------------------");

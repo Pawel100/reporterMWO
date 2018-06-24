@@ -53,7 +53,7 @@ public class Scan {
 				String fullPath = path;
 				//System.out.println(fullPath);
 				int startOfName = fullPath.lastIndexOf("_")+1;
-				int endOfname = fullPath.indexOf(".");
+				int endOfname = fullPath.lastIndexOf(".");
 				int startOfSurname = fullPath.lastIndexOf("\\")+1;		
 				String name = new String(fullPath.substring(startOfName, endOfname));
 				String surname = new String(fullPath.substring(startOfSurname, startOfName-1));

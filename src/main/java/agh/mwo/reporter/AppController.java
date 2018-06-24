@@ -2,9 +2,10 @@ package agh.mwo.reporter;
 
 import org.apache.commons.cli.CommandLine;
 
-import agh.mwo.reports.Report;
+import agh.mwo.reports.IReport;
 import agh.mwo.reports.ReportEmployees;
 import agh.mwo.reports.ReportProjects;
+import agh.mwo.visualization.IPrinter;
 import agh.mwo.visualization.PrintingToConsole;
 
 import java.time.LocalDate;
@@ -21,7 +22,7 @@ public class AppController {
 		String startDate="";
 		String endDate="";
 
-		if (!path.equals(null) && !reportType.equals(null)) {
+		if (path!=null && reportType!=null) {
 			
 			if (cmd.getOptionValue("startDate")==null) {
 				Pattern pattern = Pattern.compile(".*([0-9]{4})\\\\{0,4}(..)*");
@@ -60,14 +61,14 @@ public class AppController {
 			// todo pobierz arrayListe z ??parseData??
 
 			ArrayList<Task> tasks = new ArrayList<Task>();
-			PrintingToConsole printer =new PrintingToConsole();
+			IPrinter printer =new PrintingToConsole();
 
 			tasks = Scan.getAllRecords(path);
 
 			switch (reportType) {
 			case "1":
 				// report workers summary of work hours
-				Report reportEmployees = new ReportEmployees();
+				IReport reportEmployees = new ReportEmployees();
 				reportEmployees.generateReport(tasks, LocalDate.parse(startDate), LocalDate.parse(endDate));
 				printer.printReport(reportEmployees);
 				break;
