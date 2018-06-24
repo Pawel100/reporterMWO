@@ -9,6 +9,9 @@ public class DateChecker {
 	public String setDate(String opt, String dateFromCommandLine, String path) {
 		if (dateFromCommandLine == null) {
 			Pattern pattern = Pattern.compile(".*([0-9]{4})\\\\{0,4}(..)*");
+			if( System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
+			  pattern = Pattern.compile(".*([0-9]{4})/{0,4}(..)*");
+		    }
 			Matcher macher;
 			macher = pattern.matcher(path);
 			if (macher.matches()) {

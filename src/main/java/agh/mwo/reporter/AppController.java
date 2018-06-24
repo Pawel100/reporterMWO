@@ -33,7 +33,7 @@ public class AppController {
 		String reportType = cmd.getOptionValue("reportType");
 		String startDate="";
 		String endDate="";
-
+//
 		if (path!=null && reportType!=null) {
 
 			// checking date from commandline.
@@ -52,7 +52,7 @@ public class AppController {
 			IReport report = reportsMap.get(reportType);
 			report.generateReport(tasks, LocalDate.parse(startDate), LocalDate.parse(endDate));
 			
-			if (outputType != null && outputType == "Graph") {
+			if (outputType != null && outputType.equals("graph")) {
 				ChartExporter chart = new ChartExporter();
 				try {
 					chart.saveReportAsChart(report, reportType);
