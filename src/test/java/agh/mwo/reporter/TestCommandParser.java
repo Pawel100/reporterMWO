@@ -27,7 +27,7 @@ public class TestCommandParser {
 
         // Given
     	
-    	String path = Paths.get("src\\main\\resources\\reporter-dane\\2012\\02").toString();
+    	String path = Paths.get("src/main/resources/reporter-dane/2012/02").toString();
 
         String[] yourArgs = new String[] {"-path", path, "-reportType", "1"};
 
@@ -44,7 +44,7 @@ public class TestCommandParser {
 
         // Given
     	
-    	String path = Paths.get("src\\main\\resources\\reporter-dane\\2012").toString();
+    	String path = Paths.get("src/main/resources/reporter-dane/2012").toString();
 
         String[] yourArgs = new String[] {"-path", path, "-reportType", "1", "-startDate", "2012-07-01"};
 
@@ -61,7 +61,7 @@ public class TestCommandParser {
 
         // Given    	
     	
-    	String path = Paths.get("src\\main\\resources\\reporter-dane\\2012").toString();
+    	String path = Paths.get("src/main/resources/reporter-dane/2012").toString();
 
         String[] yourArgs = new String[] {"-path", path, "-reportType", "2", "-startDate", "2012-02-01", "-endDate", "2012-02-03"};
 
@@ -78,7 +78,7 @@ public class TestCommandParser {
 
         // Given
     	
-    	String path = Paths.get("src\\main\\resources\\reporter-dane\\2012\\02").toString();
+    	String path = Paths.get("src/main/resources/reporter-dane/2012/02").toString();
 
         String[] yourArgs = new String[] {"-path", path, "-reportType", "2", "-startDate", "2012-02-01", "-endDate", "2012-02-03"};
 

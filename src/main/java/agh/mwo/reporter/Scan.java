@@ -12,6 +12,7 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -46,6 +47,7 @@ public class Scan {
 	// po zak�adkach nazwa zak�adki=>project
 	public static ArrayList<Task> readXls(String path) {
 		ArrayList<Task> toReturn = new ArrayList<Task>();
+		ArrayList<String> errorLog = new ArrayList<String>();
 		try {
 			Workbook wb = WorkbookFactory.create(new File(path));
 				String fullPath = path;
@@ -61,11 +63,70 @@ public class Scan {
 				String project = sheet.getSheetName();
 				for (int j = 1; j <= sheet.getLastRowNum(); j++) {
 					Row r = sheet.getRow(j);
+					//obsługa złych lub pustych komórek
+					Cell c0 = r.getCell(0);
+					Cell c1 = r.getCell(1);
+					Cell c2 = r.getCell(1);
+					if(c0 == null) {
+						errorLog.add("Cell 0 at row " + j + " in file " + path + " is null");
+						break;
+					}
+					if(c1 == null) {
+						errorLog.add("Cell 1 at row " + j + " in file " + path + " is null");
+						break;
+					}
+					if(c2 == null) {
+						errorLog.add("Cell 2 at row " + j + " in file " + path + " is null");
+						break;
+					}
+					
+					//inicjalicacja zmiennych
+					LocalDate localDate;
+					String description;
+					double hours;
+					
+					
+					
+					//sprawdzanie poprawności czytanych danych
+					try {
 					Date date = r.getCell(0).getDateCellValue();
-					String description = r.getCell(1).getStringCellValue();
-					double hours = r.getCell(2).getNumericCellValue();
-					//DateTimeFormatter formatter_3=DateTimeFormatter.ofPattern("dd/MM/yy");
-					LocalDate localDate= date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+					localDate= date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+					} catch (Exception e)
+					{
+						errorLog.add("Cell 0 at row " + j + " in file " + path + " is not a date");
+						break;
+					}
+					
+					try {
+						description = r.getCell(1).getStringCellValue();
+						if(description.isEmpty()) {
+							errorLog.add("Description at row " + j + " in file " + path + " is blank");
+							break;	
+						}
+					} catch (Exception e)
+					{
+						errorLog.add("Cell 1 at row " + j + " in file " + path + " is not a string");
+						break;
+					}
+					
+					try {
+						hours = r.getCell(2).getNumericCellValue();
+					} catch (Exception e)
+					{
+						errorLog.add("Cell 2 at row " + j + " in file " + path + " is not a numeric");
+						break;
+					}
+					
+					if(hours>16) {
+						errorLog.add("Cell 2 at row " + j + " in file " + path + " shows thas someone is working too hard!");
+						break;
+					}
+					
+					
+					
+					
+					
+					//tworzenie obiektu
 					Task toAdd = new Task();
 					toAdd.setDate(localDate);
 					toAdd.setDescription(description);
@@ -87,6 +148,17 @@ public class Scan {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		
+		//printowanie błędów wczytywania
+		if(errorLog.size()==0) {
+			System.out.println("No error encountered during .xls reading.");
+		}
+		else {
+			System.out.println("Error(s) encounter during .xls reading:");
+			for (int i = 0; i<errorLog.size(); i++) {
+				System.out.println(errorLog.get(i));
+			}
 		}
 
 		return toReturn;
