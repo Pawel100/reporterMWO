@@ -5,9 +5,11 @@ import org.apache.commons.cli.CommandLine;
 import agh.mwo.reports.IReport;
 import agh.mwo.reports.ReportEmployees;
 import agh.mwo.reports.ReportProjects;
+import agh.mwo.visualization.ChartExporter;
 import agh.mwo.visualization.IPrinter;
 import agh.mwo.visualization.PrintingToConsole;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,6 +52,15 @@ public class AppController {
 			IReport report = reportsMap.get(reportType);
 			report.generateReport(tasks, LocalDate.parse(startDate), LocalDate.parse(endDate));
 			printer.printReport(report);
+			ChartExporter chart = new ChartExporter();
+			
+			try {
+				chart.saveReportAsChart(report, reportType);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println("Nie uda³o siê wygenerowaæ wykresu");
+				e.printStackTrace();
+			};
 
 		} else {
 			if (!cmd.hasOption("h")) {

@@ -16,8 +16,8 @@ public class ReportProjects extends Report {
 		this.setReportHeader(headers);
 		
 		this.setTitle( "Raport zbiorczy wg projektow");
-		this.setRaportStartingDate(startDate);
-		this.setRaportEndDate(endDate);
+		this.setReportStartingDate(startDate);
+		this.setReportEndDate(endDate);
 
 		TreeMap<String, Double> temporary = new TreeMap<String, Double>();
 		ArrayList<Task> filteredTasks = new ArrayList<Task>();

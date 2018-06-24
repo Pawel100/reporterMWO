@@ -20,13 +20,13 @@ public interface IReport {
 
 	void setReportResults(TreeMap<String, Double> reportResults);
 
-	LocalDate getRaportStartingDate();
+	LocalDate getReportStartingDate();
 
-	void setRaportStartingDate(LocalDate raportStartingDate);
+	void setReportStartingDate(LocalDate raportStartingDate);
 
-	LocalDate getRaportEndDate();
+	LocalDate getReportEndDate();
 
-	void setRaportEndDate(LocalDate raportEndDate);
+	void setReportEndDate(LocalDate raportEndDate);
 
 	void generateReport(List<Task> tasks, LocalDate startDate, LocalDate endDate);
 

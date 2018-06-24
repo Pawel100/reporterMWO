@@ -15,7 +15,7 @@ public class PrintingToConsole implements IPrinter {
 
 		System.out.println("-------------------------------------------------------------");
 		System.out.println("\n" + report.getTitle());
-		System.out.println("w okresie: "+report.getRaportStartingDate()+" - "+report.getRaportEndDate()+"\n");
+		System.out.println("w okresie: "+report.getReportStartingDate()+" - "+report.getReportEndDate()+"\n");
 		for (String header : report.getReportHeader()) {
 			System.out.print(header + "\t\t");
 		}
