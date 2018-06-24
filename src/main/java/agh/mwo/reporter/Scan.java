@@ -79,15 +79,15 @@ public class Scan {
 						errorLog.add("Cell 2 at row " + j + " in file " + path + " is null");
 						break;
 					}
-					if(c0.getBooleanCellValue()) {
+					if(c0.getStringCellValue().isEmpty()) {
 						errorLog.add("Cell 0 at row " + j + " in file " + path + " is blank");
 						break;
 					}
-					if(c1.getBooleanCellValue()) {
+					if(c1.getStringCellValue().isEmpty()) {
 						errorLog.add("Cell 1 at row " + j + " in file " + path + " is blank");
 						break;
 					}
-					if(c2.getBooleanCellValue()) {
+					if(c2.getStringCellValue().isEmpty()) {
 						errorLog.add("Cell 2 at row " + j + " in file " + path + " is blank");
 						break;
 					}
