@@ -19,6 +19,10 @@ public interface IReport {
 	TreeMap<String, Double> getReportResults();
 
 	void setReportResults(TreeMap<String, Double> reportResults);
+	
+	TreeMap<String, TreeMap<String, Double>> getReportThreeResults();
+
+	void setReportThreeResults(TreeMap<String, TreeMap<String, Double>> reportThreeResults);
 
 	LocalDate getReportStartingDate();
 

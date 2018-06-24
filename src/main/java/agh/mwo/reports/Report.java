@@ -11,6 +11,7 @@ public abstract class Report implements IReport {
 	private String title = "";
 	private List<String> reportHeader;
 	private TreeMap<String, Double> reportResults;
+	private TreeMap<String, TreeMap<String, Double>> reportThreeResults;
 	private LocalDate reportStartingDate;
 	private LocalDate reportEndDate;
 	
@@ -60,6 +61,22 @@ public abstract class Report implements IReport {
 	@Override
 	public void setReportResults(TreeMap<String, Double> reportResults) {
 		this.reportResults = reportResults;
+	}
+	
+	/* (non-Javadoc)
+	 * @see agh.mwo.reports.IReport#getReportThreeResults()
+	 */
+	@Override
+	public TreeMap<String, TreeMap<String, Double>> getReportThreeResults() {
+		return reportThreeResults;
+	}
+
+	/* (non-Javadoc)
+	 * @see agh.mwo.reports.IReport#setReportThreeResults(java.util.TreeMap)
+	 */
+	@Override
+	public void setReportThreeResults(TreeMap<String, TreeMap<String, Double>> reportThreeResults) {
+		this.reportThreeResults = reportThreeResults;
 	}
 	
 	/* (non-Javadoc)
