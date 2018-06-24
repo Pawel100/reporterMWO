@@ -20,7 +20,7 @@ public class PrintingToConsole implements IPrinter {
 			System.out.print(header + "\t\t");
 		}
 		System.out.println("\n-------------------------------------------------------------");
-if (report.getReportThreeResults().isEmpty()) {
+		if (report.getReportThreeResults() == null) {
 			
 			for (String r : report.getReportResults().keySet()) {
 				if (r.length() > maxLength) {
