@@ -68,15 +68,15 @@ public class Scan {
 					Cell c1 = r.getCell(1);
 					Cell c2 = r.getCell(1);
 					if(c0 == null) {
-						errorLog.add("Cell 0 at row " + j + " in file " + path + " is null");
+						errorLog.add("Cell 0 at row " + j + " in sheet "+ sheet.getSheetName() +" in file " + path + " is null");
 						break;
 					}
 					if(c1 == null) {
-						errorLog.add("Cell 1 at row " + j + " in file " + path + " is null");
+						errorLog.add("Cell 1 at row " + j + " in sheet "+ sheet.getSheetName() +" in file " + path + " is null");
 						break;
 					}
 					if(c2 == null) {
-						errorLog.add("Cell 2 at row " + j + " in file " + path + " is null");
+						errorLog.add("Cell 2 at row " + j + " in sheet "+ sheet.getSheetName() +" in file " + path + " is null");
 						break;
 					}
 					
@@ -93,19 +93,19 @@ public class Scan {
 					localDate= date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 					} catch (Exception e)
 					{
-						errorLog.add("Cell 0 at row " + j + " in file " + path + " is not a date");
+						errorLog.add("Cell 0 at row " + j + " in sheet "+ sheet.getSheetName() +" in file " + path + " is not a date");
 						break;
 					}
 					
 					try {
 						description = r.getCell(1).getStringCellValue();
 						if(description.isEmpty()) {
-							errorLog.add("Description at row " + j + " in file " + path + " is blank");
+							errorLog.add("Description at row " + j + " in sheet "+ sheet.getSheetName() +" in file " + path + " is blank");
 							break;	
 						}
 					} catch (Exception e)
 					{
-						errorLog.add("Cell 1 at row " + j + " in file " + path + " is not a string");
+						errorLog.add("Cell 1 at row " + j + " in sheet "+ sheet.getSheetName() +" in file " + path + " is not a string");
 						break;
 					}
 					
@@ -113,12 +113,12 @@ public class Scan {
 						hours = r.getCell(2).getNumericCellValue();
 					} catch (Exception e)
 					{
-						errorLog.add("Cell 2 at row " + j + " in file " + path + " is not a numeric");
+						errorLog.add("Cell 2 at row " + j + " in sheet "+ sheet.getSheetName() +" in file " + path + " is not a numeric");
 						break;
 					}
 					
 					if(hours>16) {
-						errorLog.add("Cell 2 at row " + j + " in file " + path + " shows thas someone is working too hard!");
+						errorLog.add("Cell 2 at row " + j + " in sheet "+ sheet.getSheetName() +" in file " + path + " shows thas someone is working too hard!");
 						break;
 					}
 					
