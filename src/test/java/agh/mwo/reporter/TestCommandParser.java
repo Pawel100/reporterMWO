@@ -27,7 +27,7 @@ public class TestCommandParser {
 
         // Given
     	
-    	String path = Paths.get("src/main/resources/reporter-dane/2012/02").toString();
+    	String path = Paths.get("src\\main\\resources\\reporter-dane\\2012\\02").toString();
 
         String[] yourArgs = new String[] {"-path", path, "-reportType", "1"};
 
