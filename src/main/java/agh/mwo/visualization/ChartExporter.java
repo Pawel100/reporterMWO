@@ -19,7 +19,7 @@ public class ChartExporter {
 	
 	public CategoryChart generateChart(IReport report, String chartType) {
 		String seriesName = "";
-		if(chartType == "employees") {
+		if(chartType == "1") {
 			seriesName = "Pracownicy";
 		} else {
 			seriesName = "Projekty";
@@ -36,7 +36,7 @@ public class ChartExporter {
 	    int i = 0;
 	    
 	    for(Entry<String, Double> entry : report.getReportResults().entrySet()) {	    	
-	    	if(chartType == "employees") {
+	    	if(chartType == "1") {
 	    		String[] nameToBeShortened = entry.getKey().split("\\s+");	    	
 		    	names[i] = nameToBeShortened[0] + " " + nameToBeShortened[1].charAt(0) + ".";
 			} else {

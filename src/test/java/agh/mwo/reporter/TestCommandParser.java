@@ -1,3 +1,4 @@
+
 package agh.mwo.reporter;
 
 import java.nio.file.Path;
@@ -46,7 +47,7 @@ public class TestCommandParser {
     	
     	String path = Paths.get("src\\main\\resources\\reporter-dane\\2012").toString();
 
-        String[] yourArgs = new String[] {"-path", "path", "-reportType", "1", "-startDate", "2012-07-01"};
+        String[] yourArgs = new String[] {"-path", path, "-reportType", "1", "-startDate", "2012-01-01"};
 
         // When
         Reporter.main(yourArgs);

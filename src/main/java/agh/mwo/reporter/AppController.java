@@ -12,9 +12,17 @@ import agh.mwo.visualization.PrintingToConsole;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AppController {
+	Map<String, IReport> reportsMap = new HashMap<>();
+
 	public void run(CommandLine cmd) {
+
+		reportsMap.put("1", new ReportEmployees());
+		reportsMap.put("2", new ReportProjects());
+		// add upcoming reports above
 
 		String path = cmd.getOptionValue("path");
 		String reportType = cmd.getOptionValue("reportType");
@@ -28,102 +36,29 @@ public class AppController {
 			startDate = dateChecker.setDate("start", cmd.getOptionValue("startDate"), path);
 			endDate = dateChecker.setDate("end", cmd.getOptionValue("endDate"), path);
 
-			
-//			if (cmd.getOptionValue("startDate")==null) {
-//				Pattern pattern = Pattern.compile(".*([0-9]{4})\\\\{0,4}(..)*");
-//				Matcher macher;
-//				macher = pattern.matcher(path);
-//				if (macher.matches()) {
-//					String year = macher.group(1);
-//					String month = (macher.group(2)==null) ? "01": macher.group(2);
-//					startDate=year+"-"+month+"-"+"01";
-//				}else {
-//					startDate="2012-01-01";
-//				}
-//			}else {
-//				startDate = cmd.getOptionValue("startDate");
-//			}
-//			
-//			if (cmd.getOptionValue("endDate")==null) {
-//				Pattern pattern = Pattern.compile(".*([0-9]{4})\\\\{0,4}(..)*");
-//				Matcher macher;
-//				macher = pattern.matcher(path);
-//				if (macher.matches()) {
-//					String endYear = macher.group(1);
-//					String endMonth = (macher.group(2)==null) ? "12": macher.group(2);
-//					LocalDate endDateExample = LocalDate.of(Integer.valueOf(endYear), Integer.valueOf(endMonth), 01);
-//					endDate=endYear+"-"+endMonth+"-"+endDateExample.getMonth().length(Year.isLeap(Long.valueOf(endYear)));
-//				}else {
-//					endDate=LocalDate.now().toString();
-//				}
-//				
-//			}else {
-//				endDate = cmd.getOptionValue("endDate");
-//			}
-//			
-//			String outputType = cmd.getOptionValue("outputType");
-//			System.out.println("ot" + outputType);
+			String outputType = cmd.getOptionValue("outputType");
 
 			ArrayList<Task> tasks;
 			IPrinter printer = new PrintingToConsole();
 
 			tasks = Scan.getAllRecords(path);
-			ChartExporter chartExporter = new ChartExporter();
 
-			switch (reportType) {
-			case "1":
-				// report workers summary of work hours
-				IReport reportEmployees = new ReportEmployees();
-				reportEmployees.generateReport(tasks, LocalDate.parse(startDate), LocalDate.parse(endDate));
-				
-//				if(outputType == "Graph") {
-		
-					try {
-						chartExporter.saveReportAsChart(reportEmployees, "employees");
-						printer.printReport(reportEmployees);
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						System.out.println("Nie uda³o sie wygenerowaæ pliku, generujê raport w konsoli");
-						printer.printReport(reportEmployees);
-					}
-//				} else {
-//					printer.printReport(reportEmployees);
-//				}
-//				
-				break;
-				
-			case "2":
-				// report per project hours
-				ReportProjects reportProjects = new ReportProjects();
-				reportProjects.generateReport(tasks, LocalDate.parse(startDate), LocalDate.parse(endDate));
-//				
-//				if(outputType == "Graph") {
-//					ChartExporter chartExporter = new ChartExporter();
-					try {
-						chartExporter.saveReportAsChart(reportProjects, "projects");
-						printer.printReport(reportProjects);
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						System.out.println("Nie uda³o sie wygenerowaæ pliku, generujê raport w konsoli");
-						printer.printReport(reportProjects);
-					}
-//				} else {
-//					printer.printReport(reportProjects);
-//				}
-//			
-				break;
-				
-			case "3":
-				// work hours per projects for each employee
+			// select report
+			IReport report = reportsMap.get(reportType);
+			report.generateReport(tasks, LocalDate.parse(startDate), LocalDate.parse(endDate));
+			printer.printReport(report);
+			ChartExporter chart = new ChartExporter();
+			
+			try {
+				chart.saveReportAsChart(report, reportType);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println("Nie uda³o siê wygenerowaæ wykresu");
+				e.printStackTrace();
+			};
 
-				break;
-				
-			default:
-				System.out.println("Bye!");
-				break;
-			}
 		} else {
-			System.out.println("Given arguments are incorrect: ");
+			System.out.println("Given arguments are incorrect. ");
 		}
 
 	}
