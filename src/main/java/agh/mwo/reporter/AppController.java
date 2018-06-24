@@ -52,13 +52,9 @@ public class AppController {
 			printer.printReport(report);
 
 		} else {
-<<<<<<< HEAD
 			if (!cmd.hasOption("h")) {
 				System.out.println("Given arguments are incorrect: ");
 			}
-=======
-			System.out.println("Given arguments are incorrect. ");
->>>>>>> e69e821adb8be7ca7f71f424a285bd0aa4cf7e2d
 		}
 
 	}
