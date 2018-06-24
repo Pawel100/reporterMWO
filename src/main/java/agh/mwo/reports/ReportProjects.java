@@ -8,7 +8,7 @@ import java.util.TreeMap;
 
 import agh.mwo.reporter.Task;
 
-public class ReportProjects extends Report{
+public class ReportProjects extends Report {
 
 	@Override
 	public void generateReport(List<Task> tasks, LocalDate startDate, LocalDate endDate) {

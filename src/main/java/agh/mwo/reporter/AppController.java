@@ -60,8 +60,8 @@ public class AppController {
 
 			// todo pobierz arrayListe z ??parseData??
 
-			ArrayList<Task> tasks = new ArrayList<Task>();
-			IPrinter printer =new PrintingToConsole();
+			ArrayList<Task> tasks;
+			IPrinter printer = new PrintingToConsole();
 
 			tasks = Scan.getAllRecords(path);
 
