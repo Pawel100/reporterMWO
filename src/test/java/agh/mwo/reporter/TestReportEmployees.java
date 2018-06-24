@@ -3,6 +3,9 @@ package agh.mwo.reporter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import agh.mwo.reports.Report;
+import agh.mwo.reports.ReportEmployees;
+
 public class TestReportEmployees {
 	
 //	@Test
@@ -29,7 +32,7 @@ public class TestReportEmployees {
         tasks.add(task);
         tasks.add(task2);
         
-        ReportEmployees newRep = new ReportEmployees();
+        Report newRep = new ReportEmployees();
         newRep.generateReport(tasks, LocalDate.of(2017, 12, 12), LocalDate.of(2018, 12, 12));
 	}
 

@@ -1,4 +1,4 @@
-package agh.mwo.reporter;
+package agh.mwo.reports;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -6,36 +6,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.TreeMap;
 
-public class ReportEmployees {
+import agh.mwo.reporter.Task;
 
-	private String title = "Raport zbiorczy godzinowy wg pracownikow";
-	private List<String> reportHeader;
-	private TreeMap<String, Double> reportResults;
-	
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public List<String> getReportHeader() {
-		return reportHeader;
-	}
-	public void setReportHeader(List<String> reportHeader) {
-		this.reportHeader = reportHeader;
-	}
-	
-	public TreeMap<String, Double> getReportResults() {
-		return reportResults;
-	}
-	public void setReportResults(TreeMap<String, Double> reportResults) {
-		this.reportResults = reportResults;
-	}
+public class ReportEmployees extends Report {
 
-
+	@Override
 	public void generateReport(List<Task> tasks, LocalDate startDate, LocalDate endDate) {
 		List<String> headers = Arrays.asList("Nazwisko i imie", "Liczba przepracowanych godzin");
 		this.setReportHeader(headers);
+		
+		this.setTitle( "Raport zbiorczy godzinowy wg pracownikow");
+		this.setRaportStartingDate(startDate);
+		this.setRaportEndDate(endDate);
 
 		TreeMap<String, Double> temporary = new TreeMap<String, Double>();
 		ArrayList<Task> filteredTasks = new ArrayList<Task>();

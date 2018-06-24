@@ -1,32 +1,35 @@
-package agh.mwo.reporter;
+package agh.mwo.visualization;
 
 import java.util.List;
 
-public class Printer {
+import agh.mwo.reports.Report;
 
-	public void printToConsole(ReportEmployees reportEmployees) {
+public class PrintingToConsole {
+
+	public void printReport(Report report) {
 		int maxLength = 0;
 
-		System.out.println("--------------------------------------------------------------------");
-		System.out.println("\n" + reportEmployees.getTitle() + "\n");
-		for (String header : reportEmployees.getReportHeader()) {
-			System.out.print(header + "\t");
+		System.out.println("-------------------------------------------------------------");
+		System.out.println("\n" + report.getTitle());
+		System.out.println("w okresie: "+report.getRaportStartingDate()+" - "+report.getRaportEndDate()+"\n");
+		for (String header : report.getReportHeader()) {
+			System.out.print(header + "\t\t");
 		}
-		System.out.println("\n-------------------------------");
-		for (String r : reportEmployees.getReportResults().keySet()) {
+		System.out.println("\n-------------------------------------------------------------");
+		for (String r : report.getReportResults().keySet()) {
 			if (r.length() > maxLength) {
 				maxLength = r.length();
 			}
 		}
-		for (String r : reportEmployees.getReportResults().keySet()) {
+		for (String r : report.getReportResults().keySet()) {
 			int spaceLength = maxLength - r.length();
 			String space = "";
 			for (int i = 0; i < spaceLength; i++) {
 				space = space + " ";
 			}
-			System.out.println(r + space + "\t" + reportEmployees.getReportResults().get(r));
+			System.out.println(r + space + "\t" + report.getReportResults().get(r));
 		}
-		System.out.println("-------------------------------");
+		System.out.println("-------------------------------------------------------------");
 	}
 
 	/*

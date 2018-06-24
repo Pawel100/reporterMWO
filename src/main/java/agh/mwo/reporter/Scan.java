@@ -64,7 +64,7 @@ public class Scan {
 					Date date = r.getCell(0).getDateCellValue();
 					String description = r.getCell(1).getStringCellValue();
 					double hours = r.getCell(2).getNumericCellValue();
-					DateTimeFormatter formatter_3=DateTimeFormatter.ofPattern("dd/MM/yy");
+					//DateTimeFormatter formatter_3=DateTimeFormatter.ofPattern("dd/MM/yy");
 					LocalDate localDate= date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 					Task toAdd = new Task();
 					toAdd.setDate(localDate);
