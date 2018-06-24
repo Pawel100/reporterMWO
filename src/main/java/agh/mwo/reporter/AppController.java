@@ -13,7 +13,11 @@ import java.util.ArrayList;
 
 public class AppController {
 	public void run(CommandLine cmd) {
-
+		
+		if (cmd.hasOption("h")) {
+			System.out.println("help");
+		};
+		
 		String path = cmd.getOptionValue("path");
 		String reportType = cmd.getOptionValue("reportType");
 		String startDate="";
@@ -58,7 +62,9 @@ public class AppController {
 				break;
 			}
 		} else {
-			System.out.println("Given arguments are incorrect: ");
+			if (!cmd.hasOption("h")) {
+				System.out.println("Given arguments are incorrect: ");
+			}
 		}
 
 	}
