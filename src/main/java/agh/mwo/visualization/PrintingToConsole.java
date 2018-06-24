@@ -20,18 +20,36 @@ public class PrintingToConsole implements IPrinter {
 			System.out.print(header + "\t\t");
 		}
 		System.out.println("\n-------------------------------------------------------------");
-		for (String r : report.getReportResults().keySet()) {
-			if (r.length() > maxLength) {
-				maxLength = r.length();
+if (report.getReportThreeResults().isEmpty()) {
+			
+			for (String r : report.getReportResults().keySet()) {
+				if (r.length() > maxLength) {
+					maxLength = r.length();
+				}
 			}
-		}
-		for (String r : report.getReportResults().keySet()) {
-			int spaceLength = maxLength - r.length();
-			String space = "";
-			for (int i = 0; i < spaceLength; i++) {
-				space = space + " ";
+			for (String r : report.getReportResults().keySet()) {
+				int spaceLength = maxLength - r.length();
+				String space = "";
+				for (int i = 0; i < spaceLength; i++) {
+					space = space + " ";
+				}
+				System.out.println(r + space + "\t" + report.getReportResults().get(r));
 			}
-			System.out.println(r + space + "\t" + report.getReportResults().get(r));
+		} else {
+			
+			for (String r : report.getReportThreeResults().keySet()) {
+				if (r.length() > maxLength) {
+					maxLength = r.length();
+				}
+			}
+			for (String r : report.getReportThreeResults().keySet()) {
+				int spaceLength = maxLength - r.length();
+				String space = "";
+				for (int i = 0; i < spaceLength; i++) {
+					space = space + " ";
+				}
+				System.out.println(r + space + "\t" + report.getReportThreeResults().get(r));
+			}
 		}
 		System.out.println("-------------------------------------------------------------");
 	}

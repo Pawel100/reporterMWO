@@ -4,6 +4,7 @@ import org.apache.commons.cli.CommandLine;
 
 import agh.mwo.reports.IReport;
 import agh.mwo.reports.ReportEmployees;
+import agh.mwo.reports.ReportEmployeesPerProjects;
 import agh.mwo.reports.ReportProjects;
 import agh.mwo.reports.ReportDays;
 import agh.mwo.visualization.ChartExporter;
@@ -31,6 +32,7 @@ public class AppController {
 
 		reportsMap.put("1", new ReportEmployees());
 		reportsMap.put("2", new ReportProjects());
+		reportsMap.put("3", new ReportEmployeesPerProjects());
 		reportsMap.put("4", new ReportDays());
 		// add upcoming reports above
 
