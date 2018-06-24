@@ -152,7 +152,7 @@ public class Scan {
 		
 		//printowanie błędów wczytywania
 		if(errorLog.size()==0) {
-			System.out.println("No error encountered during .xls reading.");
+			//System.out.println("No error encountered during .xls reading.");
 		}
 		else {
 			System.out.println("Error(s) encounter during .xls reading:");
@@ -172,6 +172,7 @@ public class Scan {
 			for (int j = 0; j < toProcess.size(); j++) {
 				toReturn.add(toProcess.get(j));
 			}
+			//toReturn.addAll(toProcess);
 		}
 		return toReturn;
 	}
