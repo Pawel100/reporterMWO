@@ -5,9 +5,11 @@ import org.apache.commons.cli.CommandLine;
 import agh.mwo.reports.IReport;
 import agh.mwo.reports.ReportEmployees;
 import agh.mwo.reports.ReportProjects;
+import agh.mwo.visualization.ChartExporter;
 import agh.mwo.visualization.IPrinter;
 import agh.mwo.visualization.PrintingToConsole;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -26,7 +28,41 @@ public class AppController {
 			startDate = dateChecker.setDate("start", cmd.getOptionValue("startDate"), path);
 			endDate = dateChecker.setDate("end", cmd.getOptionValue("endDate"), path);
 
+			
+//			if (cmd.getOptionValue("startDate")==null) {
+//				Pattern pattern = Pattern.compile(".*([0-9]{4})\\\\{0,4}(..)*");
+//				Matcher macher;
+//				macher = pattern.matcher(path);
+//				if (macher.matches()) {
+//					String year = macher.group(1);
+//					String month = (macher.group(2)==null) ? "01": macher.group(2);
+//					startDate=year+"-"+month+"-"+"01";
+//				}else {
+//					startDate="2012-01-01";
+//				}
+//			}else {
+//				startDate = cmd.getOptionValue("startDate");
+//			}
+//			
+//			if (cmd.getOptionValue("endDate")==null) {
+//				Pattern pattern = Pattern.compile(".*([0-9]{4})\\\\{0,4}(..)*");
+//				Matcher macher;
+//				macher = pattern.matcher(path);
+//				if (macher.matches()) {
+//					String endYear = macher.group(1);
+//					String endMonth = (macher.group(2)==null) ? "12": macher.group(2);
+//					LocalDate endDateExample = LocalDate.of(Integer.valueOf(endYear), Integer.valueOf(endMonth), 01);
+//					endDate=endYear+"-"+endMonth+"-"+endDateExample.getMonth().length(Year.isLeap(Long.valueOf(endYear)));
+//				}else {
+//					endDate=LocalDate.now().toString();
+//				}
+//				
+//			}else {
+//				endDate = cmd.getOptionValue("endDate");
+//			}
+//			
 			String outputType = cmd.getOptionValue("outputType");
+			System.out.println("ot" + outputType);
 
 			ArrayList<Task> tasks;
 			IPrinter printer = new PrintingToConsole();
@@ -38,14 +74,40 @@ public class AppController {
 				// report workers summary of work hours
 				IReport reportEmployees = new ReportEmployees();
 				reportEmployees.generateReport(tasks, LocalDate.parse(startDate), LocalDate.parse(endDate));
-				printer.printReport(reportEmployees);
+				
+				if(outputType == "Graph") {
+					ChartExporter chartExporter = new ChartExporter();
+					try {
+						chartExporter.saveReportAsChart(reportEmployees, "employees");
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						System.out.println("Nie uda³o sie wygenerowaæ pliku, generujê raport w konsoli");
+						printer.printReport(reportEmployees);
+					}
+				} else {
+					printer.printReport(reportEmployees);
+				}
+				
 				break;
 				
 			case "2":
 				// report per project hours
 				ReportProjects reportProjects = new ReportProjects();
 				reportProjects.generateReport(tasks, LocalDate.parse(startDate), LocalDate.parse(endDate));
-				printer.printReport(reportProjects);
+				
+				if(outputType == "Graph") {
+					ChartExporter chartExporter = new ChartExporter();
+					try {
+						chartExporter.saveReportAsChart(reportProjects, "projects");
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						System.out.println("Nie uda³o sie wygenerowaæ pliku, generujê raport w konsoli");
+						printer.printReport(reportProjects);
+					}
+				} else {
+					printer.printReport(reportProjects);
+				}
+			
 				break;
 				
 			case "3":

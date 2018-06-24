@@ -11,8 +11,8 @@ public abstract class Report implements IReport {
 	private String title = "";
 	private List<String> reportHeader;
 	private TreeMap<String, Double> reportResults;
-	private LocalDate raportStartingDate;
-	private LocalDate raportEndDate;
+	private LocalDate reportStartingDate;
+	private LocalDate reportEndDate;
 	
 	/* (non-Javadoc)
 	 * @see agh.mwo.reports.IReport#getTitle()
@@ -66,32 +66,32 @@ public abstract class Report implements IReport {
 	 * @see agh.mwo.reports.IReport#getRaportStartingDate()
 	 */
 	@Override
-	public LocalDate getRaportStartingDate() {
-		return raportStartingDate;
+	public LocalDate getReportStartingDate() {
+		return reportStartingDate;
 	}
 
 	/* (non-Javadoc)
 	 * @see agh.mwo.reports.IReport#setRaportStartingDate(java.time.LocalDate)
 	 */
 	@Override
-	public void setRaportStartingDate(LocalDate raportStartingDate) {
-		this.raportStartingDate = raportStartingDate;
+	public void setReportStartingDate(LocalDate reportStartingDate) {
+		this.reportStartingDate = reportStartingDate;
 	}
 
 	/* (non-Javadoc)
 	 * @see agh.mwo.reports.IReport#getRaportEndDate()
 	 */
 	@Override
-	public LocalDate getRaportEndDate() {
-		return raportEndDate;
+	public LocalDate getReportEndDate() {
+		return reportEndDate;
 	}
 
 	/* (non-Javadoc)
 	 * @see agh.mwo.reports.IReport#setRaportEndDate(java.time.LocalDate)
 	 */
 	@Override
-	public void setRaportEndDate(LocalDate raportEndDate) {
-		this.raportEndDate = raportEndDate;
+	public void setReportEndDate(LocalDate reportEndDate) {
+		this.reportEndDate = reportEndDate;
 	}
 	
 	/* (non-Javadoc)
