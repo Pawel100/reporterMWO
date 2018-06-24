@@ -61,13 +61,14 @@ public class AppController {
 //				endDate = cmd.getOptionValue("endDate");
 //			}
 //			
-			String outputType = cmd.getOptionValue("outputType");
-			System.out.println("ot" + outputType);
+//			String outputType = cmd.getOptionValue("outputType");
+//			System.out.println("ot" + outputType);
 
 			ArrayList<Task> tasks;
 			IPrinter printer = new PrintingToConsole();
 
 			tasks = Scan.getAllRecords(path);
+			ChartExporter chartExporter = new ChartExporter();
 
 			switch (reportType) {
 			case "1":
@@ -75,39 +76,41 @@ public class AppController {
 				IReport reportEmployees = new ReportEmployees();
 				reportEmployees.generateReport(tasks, LocalDate.parse(startDate), LocalDate.parse(endDate));
 				
-				if(outputType == "Graph") {
-					ChartExporter chartExporter = new ChartExporter();
+//				if(outputType == "Graph") {
+		
 					try {
 						chartExporter.saveReportAsChart(reportEmployees, "employees");
+						printer.printReport(reportEmployees);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						System.out.println("Nie uda³o sie wygenerowaæ pliku, generujê raport w konsoli");
 						printer.printReport(reportEmployees);
 					}
-				} else {
-					printer.printReport(reportEmployees);
-				}
-				
+//				} else {
+//					printer.printReport(reportEmployees);
+//				}
+//				
 				break;
 				
 			case "2":
 				// report per project hours
 				ReportProjects reportProjects = new ReportProjects();
 				reportProjects.generateReport(tasks, LocalDate.parse(startDate), LocalDate.parse(endDate));
-				
-				if(outputType == "Graph") {
-					ChartExporter chartExporter = new ChartExporter();
+//				
+//				if(outputType == "Graph") {
+//					ChartExporter chartExporter = new ChartExporter();
 					try {
 						chartExporter.saveReportAsChart(reportProjects, "projects");
+						printer.printReport(reportProjects);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						System.out.println("Nie uda³o sie wygenerowaæ pliku, generujê raport w konsoli");
 						printer.printReport(reportProjects);
 					}
-				} else {
-					printer.printReport(reportProjects);
-				}
-			
+//				} else {
+//					printer.printReport(reportProjects);
+//				}
+//			
 				break;
 				
 			case "3":
