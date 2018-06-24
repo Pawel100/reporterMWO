@@ -56,7 +56,10 @@ public class ChartExporter {
 	
 	public void saveReportAsChart(IReport report, String chartType) throws IOException {	    
 	    BitmapEncoder.saveBitmap(this.generateChart(report, chartType), "./Sample_Chart_" + chartType, BitmapFormat.PNG);
-	    Runtime.getRuntime().exec("RUNDLL32.EXE SHELL32.DLL,OpenAs_RunDLL C:\\Users\\Awar\\Documents\\AGH_MWO\\reporterMWO\\Sample_Chart_" + chartType + ".png");
+	    
+	    if( System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
+	    	Runtime.getRuntime().exec("cmd.exe /c \"start Sample_Chart_" + chartType + ".png\"");
+	    }
 	}
 
 }

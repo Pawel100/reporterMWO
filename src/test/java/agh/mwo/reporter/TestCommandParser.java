@@ -90,6 +90,40 @@ public class TestCommandParser {
 
 
     }
+    
+    @Test
+    public void testGraphFromCommandLineWithPath() {
+
+        // Given
+    	
+    	String path = Paths.get("src\\main\\resources\\reporter-dane\\2012\\02").toString();
+
+        String[] yourArgs = new String[] {"-path", path, "-reportType", "1", "-outputType", "Graph"};
+
+        // When
+        Reporter.main(yourArgs);
+
+        // Then
+
+
+    }
+    
+    @Test
+    public void testGraphFromCommandLineWithPathTypeProject() {
+
+        // Given
+    	
+    	String path = Paths.get("src\\main\\resources\\reporter-dane\\2012\\02").toString();
+
+        String[] yourArgs = new String[] {"-path", path, "-reportType", "2", "-outputType", "Graph"};
+
+        // When
+        Reporter.main(yourArgs);
+
+        // Then
+
+
+    }
 
 
 }

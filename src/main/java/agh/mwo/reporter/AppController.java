@@ -46,16 +46,19 @@ public class AppController {
 			// select report
 			IReport report = reportsMap.get(reportType);
 			report.generateReport(tasks, LocalDate.parse(startDate), LocalDate.parse(endDate));
-			printer.printReport(report);
-			ChartExporter chart = new ChartExporter();
 			
-			try {
-				chart.saveReportAsChart(report, reportType);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				System.out.println("Nie uda³o siê wygenerowaæ wykresu");
-				e.printStackTrace();
-			};
+			if (outputType != null && outputType == "Graph") {
+				ChartExporter chart = new ChartExporter();
+				try {
+					chart.saveReportAsChart(report, reportType);
+				} catch (IOException e) {
+					e.printStackTrace();
+					System.out.println("Nie uda³o siê wygenerowaæ wykresu, wyœwietlam w konsoli");
+					printer.printReport(report);
+				};
+			} else {
+				printer.printReport(report);
+			}		
 
 		} else {
 			System.out.println("Given arguments are incorrect. ");
