@@ -10,7 +10,12 @@ public class TestDateChecker {
 		String opt = "Start";
 		String date = "2016-02-11";
 		String path = "src\\database\\";
-		String result = dateChecker.setDate(opt, date, path);
+		String result = "";
+		try {
+			result = dateChecker.setDate(opt, date, path);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		Assert.assertEquals(result, date);
 	}
 	
@@ -20,7 +25,12 @@ public class TestDateChecker {
 		String opt = "start";
 		String date = null;
 		String path = "src\\database\\2018\\12";
-		String result = dateChecker.setDate(opt, date, path);
+		String result = "";
+		try {
+			result = dateChecker.setDate(opt, date, path);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		String expected = "2018-12-01";
 		Assert.assertEquals(expected, result);
 	}
