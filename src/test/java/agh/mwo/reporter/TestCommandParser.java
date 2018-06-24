@@ -1,5 +1,8 @@
 package agh.mwo.reporter;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.junit.Test;
 
 public class TestCommandParser {
@@ -23,8 +26,10 @@ public class TestCommandParser {
     public void testCommandLineWithPath() {
 
         // Given
+    	
+    	String path = Paths.get("src\\main\\resources\\reporter-dane\\2012\\02").toString();
 
-        String[] yourArgs = new String[] {"-path", "src\\main\\resources\\reporter-dane\\2012\\02", "-reportType", "1"};
+        String[] yourArgs = new String[] {"-path", path, "-reportType", "1"};
 
         // When
         Reporter.main(yourArgs);
@@ -38,8 +43,10 @@ public class TestCommandParser {
     public void testRaportEmployeesFromCommandLineWithoutEndDate() {
 
         // Given
+    	
+    	String path = Paths.get("src\\main\\resources\\reporter-dane\\2012").toString();
 
-        String[] yourArgs = new String[] {"-path", "src\\main\\resources\\reporter-dane\\2012", "-reportType", "1", "-startDate", "2012-07-01"};
+        String[] yourArgs = new String[] {"-path", "path", "-reportType", "1", "-startDate", "2012-07-01"};
 
         // When
         Reporter.main(yourArgs);
@@ -52,9 +59,11 @@ public class TestCommandParser {
     @Test
     public void testRaportProjectsFromCommandLineWithAllValues() {
 
-        // Given
+        // Given    	
+    	
+    	String path = Paths.get("src\\main\\resources\\reporter-dane\\2012").toString();
 
-        String[] yourArgs = new String[] {"-path", "src\\main\\resources\\reporter-dane\\2012\\02", "-reportType", "2", "-startDate", "2012-02-01", "-endDate", "2012-02-03"};
+        String[] yourArgs = new String[] {"-path", path, "-reportType", "2", "-startDate", "2012-02-01", "-endDate", "2012-02-03"};
 
         // When
         Reporter.main(yourArgs);
@@ -68,8 +77,10 @@ public class TestCommandParser {
     public void testRaportProjectsFromCommandLineWithDatesFilter() {
 
         // Given
+    	
+    	String path = Paths.get("src\\main\\resources\\reporter-dane\\2012\\02").toString();
 
-        String[] yourArgs = new String[] {"-path", "src\\main\\resources\\reporter-dane\\2012", "-reportType", "2", "-startDate", "2012-02-01", "-endDate", "2012-02-03"};
+        String[] yourArgs = new String[] {"-path", path, "-reportType", "2", "-startDate", "2012-02-01", "-endDate", "2012-02-03"};
 
         // When
         Reporter.main(yourArgs);
