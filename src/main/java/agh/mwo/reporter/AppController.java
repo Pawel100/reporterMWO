@@ -28,7 +28,6 @@ public class AppController {
 		if (cmd.hasOption("h")) {
 			System.out.println("help");
 		}
-		;
 
 		reportsMap.put("1", new ReportEmployees());
 		reportsMap.put("2", new ReportProjects());
@@ -74,7 +73,6 @@ public class AppController {
 					System.out.println("Chart export failed, displaying results in the console window");
 					printer.printReport(report);
 				}
-				;
 			} else {
 				printer.printReport(report);
 			}
