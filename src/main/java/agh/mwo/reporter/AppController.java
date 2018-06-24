@@ -19,6 +19,11 @@ public class AppController {
 	Map<String, IReport> reportsMap = new HashMap<>();
 
 	public void run(CommandLine cmd) {
+		
+		if (cmd.hasOption("h")) {
+			System.out.println("help");
+		};
+		
 
 		reportsMap.put("1", new ReportEmployees());
 		reportsMap.put("2", new ReportProjects());
@@ -61,7 +66,9 @@ public class AppController {
 			}		
 
 		} else {
-			System.out.println("Given arguments are incorrect. ");
+			if (!cmd.hasOption("h")) {
+				System.out.println("Given arguments are incorrect: ");
+			}
 		}
 
 	}
