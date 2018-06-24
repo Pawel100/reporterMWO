@@ -9,10 +9,7 @@ import agh.mwo.visualization.IPrinter;
 import agh.mwo.visualization.PrintingToConsole;
 
 import java.time.LocalDate;
-import java.time.Year;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class AppController {
 	public void run(CommandLine cmd) {
@@ -23,49 +20,13 @@ public class AppController {
 		String endDate="";
 
 		if (path!=null && reportType!=null) {
-			
-			/*
-			 * checking date from commandline.
-			 */
+
+			// checking date from commandline.
 			DateChecker dateChecker = new DateChecker();
 			startDate = dateChecker.setDate("start", cmd.getOptionValue("startDate"), path);
 			endDate = dateChecker.setDate("end", cmd.getOptionValue("endDate"), path);
-			
-//			if (cmd.getOptionValue("startDate")==null) {
-//				Pattern pattern = Pattern.compile(".*([0-9]{4})\\\\{0,4}(..)*");
-//				Matcher macher;
-//				macher = pattern.matcher(path);
-//				if (macher.matches()) {
-//					String year = macher.group(1);
-//					String month = (macher.group(2)==null) ? "01": macher.group(2);
-//					startDate=year+"-"+month+"-"+"01";
-//				}else {
-//					startDate="2012-01-01";
-//				}
-//			}else {
-//				startDate = cmd.getOptionValue("startDate");
-//			}
-//			
-//			if (cmd.getOptionValue("endDate")==null) {
-//				Pattern pattern = Pattern.compile(".*([0-9]{4})\\\\{0,4}(..)*");
-//				Matcher macher;
-//				macher = pattern.matcher(path);
-//				if (macher.matches()) {
-//					String endYear = macher.group(1);
-//					String endMonth = (macher.group(2)==null) ? "12": macher.group(2);
-//					LocalDate endDateExample = LocalDate.of(Integer.valueOf(endYear), Integer.valueOf(endMonth), 01);
-//					endDate=endYear+"-"+endMonth+"-"+endDateExample.getMonth().length(Year.isLeap(Long.valueOf(endYear)));
-//				}else {
-//					endDate=LocalDate.now().toString();
-//				}
-//				
-//			}else {
-//				endDate = cmd.getOptionValue("endDate");
-//			}
-//			
-			String outputType = cmd.getOptionValue("outputType");
 
-			// todo pobierz arrayListe z ??parseData??
+			String outputType = cmd.getOptionValue("outputType");
 
 			ArrayList<Task> tasks;
 			IPrinter printer = new PrintingToConsole();
