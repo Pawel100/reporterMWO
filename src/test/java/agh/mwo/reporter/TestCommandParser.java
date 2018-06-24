@@ -98,7 +98,7 @@ public class TestCommandParser {
     	
     	String path = Paths.get("src\\main\\resources\\reporter-dane\\2012\\02").toString();
 
-        String[] yourArgs = new String[] {"-path", path, "-reportType", "1", "-outputType", "Graph"};
+        String[] yourArgs = new String[] {"-path", path, "-reportType", "1", "-outputType", "graph"};
 
         // When
         Reporter.main(yourArgs);
@@ -115,7 +115,7 @@ public class TestCommandParser {
     	
     	String path = Paths.get("src\\main\\resources\\reporter-dane\\2012\\02").toString();
 
-        String[] yourArgs = new String[] {"-path", path, "-reportType", "2", "-outputType", "Graph"};
+        String[] yourArgs = new String[] {"-path", path, "-reportType", "2", "-outputType", "graph"};
 
         // When
         Reporter.main(yourArgs);
