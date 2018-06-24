@@ -21,7 +21,7 @@ public class AppController {
 		String startDate="";
 		String endDate="";
 
-		if (!path.equals(null) && !reportType.equals(null)) {
+		if (path!=null && reportType!=null) {
 			
 			if (cmd.getOptionValue("startDate")==null) {
 				Pattern pattern = Pattern.compile(".*([0-9]{4})\\\\{0,4}(..)*");

@@ -18,8 +18,8 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 public class Scan {
-	// ta funkcja eksploruje wszystkie podfoldery i zwraca w arrayliœcie stringów
-	// œcie¿ki do plików z rozszerzeneim .xls
+	// ta funkcja eksploruje wszystkie podfoldery i zwraca w arrayliï¿½cie stringï¿½w
+	// ï¿½cieï¿½ki do plikï¿½w z rozszerzeneim .xls
 	public static ArrayList<String> exploreFolders(String path) {
 		ArrayList<String> toReturn = new ArrayList<String>();
 
@@ -42,8 +42,8 @@ public class Scan {
 		return toReturn;
 	}
 
-	// funkcja ze œcie¿ki wczytuje plik eksela ekstrahuj¹c imiê i nazwisko, iteruje
-	// po zak³adkach nazwa zak³adki=>project
+	// funkcja ze ï¿½cieï¿½ki wczytuje plik eksela ekstrahujï¿½c imiï¿½ i nazwisko, iteruje
+	// po zakï¿½adkach nazwa zakï¿½adki=>project
 	public static ArrayList<Task> readXls(String path) {
 		ArrayList<Task> toReturn = new ArrayList<Task>();
 		try {
@@ -51,11 +51,11 @@ public class Scan {
 				String fullPath = path;
 				//System.out.println(fullPath);
 				int startOfName = fullPath.lastIndexOf("_")+1;
-				int endOfname = fullPath.indexOf(".");
+				int endOfname = fullPath.lastIndexOf(".");
 				int startOfSurname = fullPath.lastIndexOf("\\")+1;		
 				String name = new String(fullPath.substring(startOfName, endOfname));
 				String surname = new String(fullPath.substring(startOfSurname, startOfName-1));
-			// iterujê po sheetach
+			// iterujï¿½ po sheetach
 			for (int i = 0; i < wb.getNumberOfSheets(); i++) {
 				Sheet sheet = wb.getSheetAt(i);
 				String project = sheet.getSheetName();
