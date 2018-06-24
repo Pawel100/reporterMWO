@@ -5,6 +5,7 @@ import org.apache.commons.cli.CommandLine;
 import agh.mwo.reports.IReport;
 import agh.mwo.reports.ReportEmployees;
 import agh.mwo.reports.ReportProjects;
+import agh.mwo.reports.ReportDays;
 import agh.mwo.visualization.ChartExporter;
 import agh.mwo.visualization.IPrinter;
 import agh.mwo.visualization.PrintingToConsole;
@@ -27,6 +28,7 @@ public class AppController {
 
 		reportsMap.put("1", new ReportEmployees());
 		reportsMap.put("2", new ReportProjects());
+		reportsMap.put("4", new ReportDays());
 		// add upcoming reports above
 
 		String path = cmd.getOptionValue("path");
@@ -54,7 +56,7 @@ public class AppController {
 			
 			if (outputType != null && outputType == "Graph") {
 				ChartExporter chart = new ChartExporter();
-				try {
+				try {reportsMap.put("2", new ReportProjects());
 					chart.saveReportAsChart(report, reportType);
 				} catch (IOException e) {
 					e.printStackTrace();
