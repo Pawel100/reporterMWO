@@ -19,7 +19,10 @@ public class AppController {
 	Map<String, IReport> reportsMap = new HashMap<>();
 
 	public void run(CommandLine cmd) {
-
+		
+		String START = "start";
+		String END = "end";
+		
 		if (cmd.hasOption("h")) {
 			System.out.println("help");
 		}
@@ -37,9 +40,15 @@ public class AppController {
 		if (path != null && reportType != null) {
 
 			// checking date from commandline.
-			DateChecker dateChecker = new DateChecker();
-			startDate = dateChecker.setDate("start", cmd.getOptionValue("startDate"), path);
-			endDate = dateChecker.setDate("end", cmd.getOptionValue("endDate"), path);
+			try {
+				DateChecker dateChecker = new DateChecker();
+				startDate = dateChecker.setDate(START, cmd.getOptionValue("startDate"), path);
+				endDate = dateChecker.setDate(END, cmd.getOptionValue("endDate"), path);
+			} catch (TypeOfDateException ex) {
+				System.out.println("SET KIND OF DATE: START OR END");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 
 			String outputType = cmd.getOptionValue("outputType");
 

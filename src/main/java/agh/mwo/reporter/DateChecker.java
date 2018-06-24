@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DateChecker {
-	public String setDate(String opt, String dateFromCommandLine, String path) {
+	public String setDate(String opt, String dateFromCommandLine, String path) throws Exception {
 		if (dateFromCommandLine == null) {
 			Pattern pattern = Pattern.compile(".*([0-9]{4})\\\\{0,4}(..)*");
 			Matcher macher;
@@ -24,8 +24,7 @@ public class DateChecker {
 					return year + "-" + month + "-" + endDateExample.getMonth().length(Year.isLeap(Long.valueOf(year)));
 					
 				}else {
-					//System.out.println("else");
-					return "3000-12-12";
+					throw new TypeOfDateException("WRONG DATE TYPE");
 				}
 			} else {
 				if (opt.equals("start"))
@@ -33,7 +32,7 @@ public class DateChecker {
 				if (opt.equals("end"))
 					return LocalDate.now().toString();
 				else
-					return "3000-12-12";
+					throw new TypeOfDateException("WRONG DATE TYPE");
 			}
 		} else {
 			return dateFromCommandLine;
